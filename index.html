@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>On Track | Life OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="widget-wrapper">
+    <!-- Settings Button -->
+    <button class="settings-btn" onclick="toggleSettings()" title="Widget Settings">⚙️</button>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+      <h3>🎨 Customization</h3>
+      
+      <div class="setting-group">
+        <label>Heatmap Theme</label>
+        <div class="theme-options">
+          <div class="t-dot" style="background:#39d353" onclick="setHeatmapTheme('green')"></div>
+          <div class="t-dot" style="background:#54aeff" onclick="setHeatmapTheme('blue')"></div>
+          <div class="t-dot" style="background:#d2a8ff" onclick="setHeatmapTheme('purple')"></div>
+          <div class="t-dot" style="background:#ff9b57" onclick="setHeatmapTheme('orange')"></div>
+        </div>
+      </div>
+
+
+
+      <hr style="border-color: var(--border); margin: 8px 0;">
+      <button class="btn btn-outline" style="width:100%" onclick="toggleEditData()">✏️ Edit Stats & Habits</button>
+
+      <button class="btn-close-settings" onclick="toggleSettings()">Done</button>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+      <img src="banner.png" alt="On Track">
+    </div>
+
+    <!-- Main Grid -->
+    <!-- Top Row: Stats (Radar) -->
+    <div class="dashboard-top">
+      <!-- Simple Radar Chart -->
+      <div class="card radar-card">
+        <div class="card-header">
+          <span class="dot purple"></span>
+          <h2>Overview Stats</h2>
+        </div>
+        <div style="position: relative; height: 320px; display: flex; align-items: center; justify-content: center; margin-top: 16px;">
+          <canvas id="simpleRadarChart"></canvas>
+        </div>
+        <div class="stats-legend" id="statsLegend" style="margin-top: 24px;"></div>
+      </div>
+
+      <!-- Complex Radar Chart -->
+      <div class="card radar-card">
+        <div class="card-header">
+          <span class="dot blue"></span>
+          <h2>Detailed Breakdown</h2>
+        </div>
+        <div style="position: relative; height: 320px; display: flex; align-items: center; justify-content: center; margin-top: 16px;">
+          <canvas id="complexRadarChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row: Activity Heatmap (Full Width) -->
+    <div class="card heatmap-card full-width" id="heatmapCard" data-theme="green">
+      <div class="card-header">
+        <span class="dot green"></span>
+        <h2 id="heatmapTitle">Activity Heatmap (1 Year)</h2>
+      </div>
+      <div class="heatmap-scroll-wrapper">
+        <div class="heatmap-body">
+          <div class="heatmap-labels-wrapper">
+            <div class="heatmap-months" id="heatmapMonths"></div>
+            <div class="heatmap-days-grid">
+              <div class="heatmap-days">
+                <span></span>
+                <span>Mon</span>
+                <span></span>
+                <span>Wed</span>
+                <span></span>
+                <span>Fri</span>
+                <span></span>
+              </div>
+              <div class="heatmap-grid" id="heatmapGrid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="heatmap-legend" style="margin-top: 12px;">
+        <span>Less</span>
+        <div class="l-cell lvl-0"></div>
+        <div class="l-cell lvl-1"></div>
+        <div class="l-cell lvl-2"></div>
+        <div class="l-cell lvl-3"></div>
+        <div class="l-cell lvl-4"></div>
+        <span>More</span>
+      </div>
+    </div>
+    
+    <!-- Edit Data Modal -->
+    <div class="modal-overlay" id="editDataModal">
+      <div class="modal-content" style="width: 500px; max-height: 90vh; overflow-y: auto;">
+        <h3>✏️ Edit Your Data</h3>
+        
+        <div class="modal-section">
+          <h4>Overview Chart (Areas)</h4>
+          <div id="editSimpleAreasList" class="edit-list"></div>
+          <button class="btn btn-sm" onclick="addSimpleArea()">+ Add Area</button>
+        </div>
+
+        <hr style="border-color: var(--border); margin: 24px 0;">
+
+        <div class="modal-section">
+          <h4>Detailed Chart (Labels)</h4>
+          <input type="text" id="editRadarAxes" class="edit-input" style="width:100%" placeholder="e.g. Understanding, Clarity, Swiftness">
+        </div>
+
+        <div class="modal-section" style="margin-top: 16px;">
+          <h4>Detailed Chart (Layers)</h4>
+          <div id="editRadarLayers" class="edit-list"></div>
+          <button class="btn btn-sm" onclick="addRadarLayer()">+ Add Layer</button>
+        </div>
+
+        <div style="margin-top: 24px; display:flex; gap: 8px; justify-content: flex-end;">
+          <button class="btn btn-outline" onclick="toggleEditData()">Cancel</button>
+          <button class="btn btn-primary" onclick="saveDataEdits()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

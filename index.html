@@ -38,11 +38,16 @@
     </div>
 
 
-    <!-- Main Grid -->
-    <!-- Top Row: Stats (Radar) -->
-    <div class="dashboard-top">
-      <!-- Simple Radar Chart -->
-      <div class="card radar-card">
+    <!-- Tab Navigation -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="switchTab('simpleRadar')">Overview</button>
+      <button class="tab-btn" onclick="switchTab('complexRadar')">Detailed</button>
+      <button class="tab-btn" onclick="switchTab('heatmap')">Heatmap</button>
+    </div>
+
+    <!-- Tab Contents -->
+    <div class="tab-content active" id="tab-simpleRadar">
+      <div class="card radar-card full-width">
         <div class="card-header">
           <span class="dot purple"></span>
           <h2>Overview Stats</h2>
@@ -52,9 +57,10 @@
         </div>
         <div class="stats-legend" id="statsLegend" style="margin-top: 24px;"></div>
       </div>
+    </div>
 
-      <!-- Complex Radar Chart -->
-      <div class="card radar-card">
+    <div class="tab-content" id="tab-complexRadar">
+      <div class="card radar-card full-width">
         <div class="card-header">
           <span class="dot blue"></span>
           <h2>Detailed Breakdown</h2>
@@ -65,39 +71,40 @@
       </div>
     </div>
 
-    <!-- Bottom Row: Activity Heatmap (Full Width) -->
-    <div class="card heatmap-card full-width" id="heatmapCard" data-theme="green">
-      <div class="card-header">
-        <span class="dot green"></span>
-        <h2 id="heatmapTitle">Activity Heatmap (1 Year)</h2>
-      </div>
-      <div class="heatmap-scroll-wrapper">
-        <div class="heatmap-body">
-          <div class="heatmap-labels-wrapper">
-            <div class="heatmap-months" id="heatmapMonths"></div>
-            <div class="heatmap-days-grid">
-              <div class="heatmap-days">
-                <span></span>
-                <span>Mon</span>
-                <span></span>
-                <span>Wed</span>
-                <span></span>
-                <span>Fri</span>
-                <span></span>
+    <div class="tab-content" id="tab-heatmap">
+      <div class="card heatmap-card full-width" id="heatmapCard" data-theme="green">
+        <div class="card-header">
+          <span class="dot green"></span>
+          <h2 id="heatmapTitle">Activity Heatmap (1 Year)</h2>
+        </div>
+        <div class="heatmap-scroll-wrapper">
+          <div class="heatmap-body">
+            <div class="heatmap-labels-wrapper">
+              <div class="heatmap-months" id="heatmapMonths"></div>
+              <div class="heatmap-days-grid">
+                <div class="heatmap-days">
+                  <span></span>
+                  <span>Mon</span>
+                  <span></span>
+                  <span>Wed</span>
+                  <span></span>
+                  <span>Fri</span>
+                  <span></span>
+                </div>
+                <div class="heatmap-grid" id="heatmapGrid"></div>
               </div>
-              <div class="heatmap-grid" id="heatmapGrid"></div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="heatmap-legend" style="margin-top: 12px;">
-        <span>Less</span>
-        <div class="l-cell lvl-0"></div>
-        <div class="l-cell lvl-1"></div>
-        <div class="l-cell lvl-2"></div>
-        <div class="l-cell lvl-3"></div>
-        <div class="l-cell lvl-4"></div>
-        <span>More</span>
+        <div class="heatmap-legend" style="margin-top: 12px;">
+          <span>Less</span>
+          <div class="l-cell lvl-0"></div>
+          <div class="l-cell lvl-1"></div>
+          <div class="l-cell lvl-2"></div>
+          <div class="l-cell lvl-3"></div>
+          <div class="l-cell lvl-4"></div>
+          <span>More</span>
+        </div>
       </div>
     </div>
     

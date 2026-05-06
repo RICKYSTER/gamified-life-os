@@ -431,3 +431,20 @@ window.onload = async () => {
   renderYearSelector();
   renderHeatmap();
 };
+
+// ── TABS ──
+window.switchTab = function(tabId) {
+  // Update content
+  document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+  const tabEl = document.getElementById('tab-' + tabId);
+  if (tabEl) tabEl.classList.add('active');
+  
+  // Update buttons
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    if (btn.getAttribute('onclick').includes(tabId)) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+};

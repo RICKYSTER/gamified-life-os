@@ -2,7 +2,7 @@
 
 A high-performance, standalone frontend widget designed to be embedded directly into a Notion workspace. It provides visual analytics (Activity Heatmaps and RPG-style Radar Charts) that Notion cannot natively render.
 
-![On Track Widget](banner.png)
+![On Track Widget](demo.webp)
 
 ## Features
 - **1-Year Activity Heatmap:** A GitHub-style 364-day commit graph tracking your daily habits and consistency.
